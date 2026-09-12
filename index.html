@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Early-Tenure Retention Trigger | Case Study</title>
+    <style>
+        /* CSS reset and base styles */
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: #2c3e50;
+            line-height: 1.8;
+            background-color: #f9fbfd;
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #002244;
+            line-height: 1.3;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 3rem;
+            margin-bottom: 1.2rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #4a5568;
+            margin-top: 0;
+            margin-bottom: 2rem;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        .meta-info {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 0.95rem;
+            color: #4a5568;
+            background: #edf2f7;
+            padding: 16px 24px;
+            border-radius: 8px;
+            margin-bottom: 2.5rem;
+            border-left: 4px solid #2b6cb0;
+        }
+
+        .meta-info strong {
+            color: #2d3748;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Table Styles */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 2.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 0.95rem;
+            background: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background-color: #f7fafc;
+            font-weight: 600;
+            color: #2d3748;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: #f8fafc;
+        }
+
+        /* Metrics Callout Section */
+        .metrics-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin: 2.5rem 0;
+        }
+
+        .metric-card {
+            flex: 1;
+            min-width: 200px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            border-top: 4px solid #2b6cb0;
+        }
+
+        .metric-label {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #718096;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .metric-value {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #002244;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .metric-desc {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 0.85rem;
+            color: #a0aec0;
+        }
+
+        .metric-card.highlight {
+            border-top-color: #e53e3e;
+        }
+
+        .metric-card.highlight .metric-value {
+            color: #e53e3e;
+        }
+
+        /* Bar Visual */
+        .bar-visual-container {
+            margin: 2.5rem 0;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .bar-row {
+            margin-bottom: 20px;
+        }
+
+        .bar-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .bar-label {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .bar-track {
+            background-color: #edf2f7;
+            height: 24px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .bar-fill.high {
+            background-color: #e53e3e;
+            width: 41.6%;
+        }
+
+        .bar-fill.low {
+            background-color: #38a169;
+            width: 15.2%;
+        }
+
+        /* Step Visual */
+        .steps-container {
+            margin: 2.5rem 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .step-item {
+            display: flex;
+            margin-bottom: 24px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+            position: relative;
+        }
+
+        .step-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background-color: #2b6cb0;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 20px;
+        }
+
+        .step-content {
+            flex-grow: 1;
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: #002244;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .step-desc {
+            color: #4a5568;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Pull Quote */
+        .pull-quote {
+            margin: 3rem 0;
+            padding: 30px 40px;
+            background-color: #ebf8fa;
+            border-left: 6px solid #319795;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #285e61;
+            border-radius: 0 12px 12px 0;
+        }
+
+        /* Deliverables Section */
+        .deliverables-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 2rem;
+        }
+
+        .deliverable-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s ease-in-out;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .deliverable-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+            border-color: #2b6cb0;
+        }
+
+        .deliverable-info {
+            display: flex;
+            flex-direction: column;
+            padding-right: 24px;
+        }
+
+        .deliverable-title {
+            font-weight: 600;
+            font-size: 1.15rem;
+            color: #002244;
+            margin-bottom: 6px;
+        }
+
+        .deliverable-desc {
+            font-size: 0.95rem;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+
+        .deliverable-button {
+            background: #2b6cb0;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+
+        .deliverable-card:hover .deliverable-button {
+            background: #1a365d;
+        }
+
+        /* Footer */
+        .site-footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e2e8f0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 0.85rem;
+            color: #a0aec0;
+            text-align: center;
+        }
+
+        @media (max-width: 640px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .metrics-container {
+                flex-direction: column;
+            }
+
+            .deliverable-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .deliverable-info {
+                padding-right: 0;
+            }
+
+            .deliverable-button {
+                width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+            }
+
+            .pull-quote {
+                padding: 20px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Early-Tenure Retention Trigger</h1>
+        <h3>A subscription retention feature, designed from real churn data</h3>
+
+        <div class="meta-info">
+            <strong>Role:</strong> Product Manager (portfolio project)
+        </div>
+
+        <h2>The Problem</h2>
+        <p>A subscription business with a month-to-month contract option was losing customers at a company-wide rate of
+            26.5%. But averages hide the real story: when broken down by segment, one group stood out — month-to-month
+            customers, within their first 6 months, who had not adopted a support add-on — churned at nearly 2.5x the
+            overall rate.</p>
+        <p>That segment was 966 customers, representing $63.3K in monthly recurring revenue sitting in the highest-risk
+            window of the customer lifecycle.</p>
+
+        <div class="metrics-container">
+            <div class="metric-card">
+                <div class="metric-label">Company-Wide Churn</div>
+                <div class="metric-value">26.5%</div>
+                <div class="metric-desc">Overall average</div>
+            </div>
+            <div class="metric-card highlight">
+                <div class="metric-label">High-Risk Segment Churn</div>
+                <div class="metric-value">65.7%</div>
+                <div class="metric-desc">Month-to-month, &lt;6mo tenure, no support add-on</div>
+            </div>
+        </div>
+
+        <h2>The Insight</h2>
+        <p>Customers with a TechSupport add-on churned at 15.2%, versus 41.6% without one — a 63.6% relative gap.
+            Whether that's causal or just correlational wasn't something the data alone could answer, so the feature was
+            designed to test that question, not assume the answer.</p>
+
+        <div class="bar-visual-container">
+            <div class="bar-row">
+                <div class="bar-label">
+                    <span>Without TechSupport</span>
+                    <span>41.6% Churn</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill high"></div>
+                </div>
+            </div>
+            <div class="bar-row">
+                <div class="bar-label">
+                    <span>With TechSupport</span>
+                    <span>15.2% Churn</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill low"></div>
+                </div>
+            </div>
+        </div>
+
+        <h2>The Feature: Early-Tenure Retention Trigger</h2>
+
+        <div class="steps-container">
+            <div class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <div class="step-title">Trigger</div>
+                    <div class="step-desc">Month-to-month contract + 30-45 days tenure + no TechSupport/OnlineSecurity
+                        add-on</div>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <div class="step-title">Action</div>
+                    <div class="step-desc">Customer Success places a proactive check-in call and offers a free 30-day
+                        trial of the support add-on</div>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <div class="step-title">Suppression</div>
+                    <div class="step-desc">Customers already contacted recently, or with an open support ticket, are
+                        excluded</div>
+                </div>
+            </div>
+            <div class="step-item">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <div class="step-title">Validation</div>
+                    <div class="step-desc">Rolled out as a controlled pilot (50% treatment / 50% control), not a blanket
+                        launch</div>
+                </div>
+            </div>
+        </div>
+
+        <h2>Impact Model (Pilot-Scale)</h2>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Modeled Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Target segment</strong></td>
+                        <td>966 customers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Assumed adoption rate</strong></td>
+                        <td>40%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Customers retained (modeled)</strong></td>
+                        <td>~161</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Annualized revenue saved</strong></td>
+                        <td>~$127K</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Intervention cost</strong></td>
+                        <td>~$3.1K</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Modeled ROI</strong></td>
+                        <td>~40x</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="meta-info"
+            style="border-left-color: #718096; background: #f7fafc; margin-top: -1.5rem; margin-bottom: 2.5rem;">
+            <strong>Note:</strong> Two explicit assumptions drive this model — adoption rate and cost per outreach —
+            both flagged for replacement with real pilot data before any full rollout decision.
+        </p>
+
+        <div class="pull-quote">
+            "The easy version of this project stops at 'customers without support add-ons churn more, so cross-sell
+            support add-ons.' That's a data observation, not a product decision. The harder, more honest version treats
+            the correlation as a hypothesis, designs a pilot with a real control group to test it, and builds in
+            guardrails before scaling."
+        </div>
+
+        <h2>Artifacts</h2>
+        <div class="deliverables-container">
+            <a href="assets/churn_retention_model.xlsx" download class="deliverable-card">
+                <div class="deliverable-info">
+                    <div class="deliverable-title">Churn Driver Analysis &amp; Impact Model</div>
+                    <div class="deliverable-desc">Excel model identifying churn drivers and estimating intervention ROI
+                    </div>
+                </div>
+                <div class="deliverable-button">Download Excel</div>
+            </a>
+
+            <a href="assets/PRD_Early_Tenure_Retention_Trigger.pdf" target="_blank" class="deliverable-card">
+                <div class="deliverable-info">
+                    <div class="deliverable-title">Product Requirements Document (PRD)</div>
+                    <div class="deliverable-desc">Logic, suppression rules, and controlled pilot design</div>
+                </div>
+                <div class="deliverable-button">Read the PRD</div>
+            </a>
+
+            <a href="assets/Exec_Memo_Early_Tenure_Retention_Trigger.pdf" target="_blank" class="deliverable-card">
+                <div class="deliverable-info">
+                    <div class="deliverable-title">Executive Memo</div>
+                    <div class="deliverable-desc">One-page summary of the problem, hypothesis, and pilot strategy</div>
+                </div>
+                <div class="deliverable-button">Read the Memo</div>
+            </a>
+        </div>
+
+        <footer class="site-footer">
+            Dataset: IBM Telco Customer Churn (7,043 customers), a public sample dataset used as a stand-in for a live
+            customer base.
+        </footer>
+    </div>
+</body>
+
+</html>
